@@ -14,7 +14,6 @@ export default function Shipping() {
     control,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -54,29 +53,6 @@ export default function Shipping() {
     router.push("/payment");
   };
 
-  const chooseLocationHandler = () => {
-    const fullName = getValues("fullName");
-    const address = getValues("address");
-    const city = getValues("city");
-    const postalCode = getValues("postalCode");
-    const country = getValues("country");
-    dispatch({
-      type: "SAVE_SHIPPING_ADDRESS",
-      payload: { fullName, address, city, postalCode, country },
-    });
-    Cookies.set(
-      "shippingAddress",
-      JSON.stringify({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        location,
-      })
-    );
-    router.push("/map");
-  };
   return (
     <Layout title="Shipping Address">
       <CheckoutWizard activeStep={1} />
